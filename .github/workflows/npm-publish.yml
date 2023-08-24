@@ -24,6 +24,6 @@ jobs:
         echo APPLICATION_PORT=${{ secrets.APPLICATION_PORT }} >> .env  
         echo DATABASE_NAME=${{ secrets.DATABASE_NAME }} >> .env 
         echo DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }} >> .env 
-        echo DATABASE_PASSWORD=${{ secrets.DATABSE_PASSWORD }} >> .env
+        echo DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }} >> .env
     - run: npm ci
     - run: pm2 restart back
