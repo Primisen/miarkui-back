@@ -18,5 +18,12 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - name: create env file
+      run: |
+        touch .env
+        echo APPLICATION_PORT=${{ secrets.APPLICATION_PORT }} >> .env  
+        echo DATABASE_NAME=${{ secrets.DATABASE_NAME }} >> .env 
+        echo DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }} >> .env 
+        echo DATABASE_PASSWORD=${{ secrets.DATABSE_PASSWORD }} >> .env
     - run: npm ci
     - run: pm2 restart back
