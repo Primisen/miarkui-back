@@ -11,14 +11,12 @@ class SignInService {
     private token!: string;
 
     async signIn(request: Request) {
-        if (await this.credentialsIsCorrect(request.body.email, request.body.password)) {
-            this.token = this.createToken(this.user);
-        }
-        return this.token;
+        if (await this.credentialsIsCorrect(request.body.email, request.body.password))
+            return this.createToken(this.user);
     }
 
     private async credentialsIsCorrect(email: string, password: string) {
-        return (await this.emailIsExists(email)) && this.passwordIsCorrect(password);
+        return (await this.emailIsExists(email)) && (await this.passwordIsCorrect(password));
     }
 
     private async emailIsExists(email: string) {
