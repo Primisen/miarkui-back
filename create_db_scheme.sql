@@ -12,15 +12,24 @@ INSERT INTO role (name) VALUE ("USER");
 
 CREATE TABLE user (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    role_id INT NOT NULL,
     username VARCHAR(20) NOT NULL,
     email VARCHAR(20) NOT NULL,
     password VARCHAR(512) NOT NULL,
 
-    FOREIGN KEY (role_id)
-        REFERENCES role(id),
+    UNIQUE(username),
+    UNIQUE(email)
+);
 
-    UNIQUE(username)
+CREATE TABLE user_role (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    role_id INT NOT NULL,
+
+    FOREIGN KEY (user_id)
+        REFERENCES user(id),
+
+    FOREIGN KEY (role_id)
+        REFERENCES role(id)
 );
 
 CREATE TABLE category (
