@@ -10,7 +10,7 @@ CREATE TABLE role (
 INSERT INTO role (name) VALUE ("ADMIN");
 INSERT INTO role (name) VALUE ("USER");
 
-CREATE TABLE user (
+CREATE TABLE userRouter (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(20) NOT NULL,
     email VARCHAR(20) NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE user_role (
     role_id INT NOT NULL,
 
     FOREIGN KEY (user_id)
-        REFERENCES user(id),
+        REFERENCES userRouter(id),
 
     FOREIGN KEY (role_id)
         REFERENCES role(id)
@@ -57,7 +57,7 @@ CREATE TABLE rating (
     user_id INT NOT NULL,
 
     FOREIGN KEY (user_id)
-        REFERENCES user(id),
+        REFERENCES userRouter(id),
 
     FOREIGN KEY (subject_id)
         REFERENCES subject(id)
@@ -74,7 +74,7 @@ CREATE TABLE review (
         REFERENCES subject(id),
 
     FOREIGN KEY (user_id)
-        REFERENCES user(id)
+        REFERENCES userRouter(id)
 );
 
 CREATE TABLE image (
@@ -93,7 +93,7 @@ CREATE TABLE comment (
     review_id INT NOT NULL,
 
     FOREIGN KEY (user_id)
-        REFERENCES user(id),
+        REFERENCES userRouter(id),
 
     FOREIGN KEY (review_id)
         REFERENCES review(id)
@@ -105,7 +105,7 @@ CREATE TABLE likes (
     review_id INT NOT NULL,
 
     FOREIGN KEY (user_id)
-        REFERENCES user(id),
+        REFERENCES userRouter(id),
 
     FOREIGN KEY (review_id)
         REFERENCES review(id)

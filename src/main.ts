@@ -1,8 +1,12 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import {userRouter} from './routes/userRouter.js';
 import bodyParser from 'body-parser';
 import sequelize from './configs/sequelize.js';
+import {userRouter} from './routes/userRouter.js';
+import {subjectRouter} from './routes/subjectRouter.js'
+import { ratingRouter } from './routes/ratingRouter.js'
+import { reviewRouter } from './routes/reviewRouter.js'
+import { commentRouter } from './routes/commentRouter.js'
 
 dotenv.config();
 
@@ -17,6 +21,10 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/', userRouter);
+app.use('/', subjectRouter);
+app.use('/', ratingRouter);
+app.use('/', reviewRouter);
+app.use('/', commentRouter);
 
 const start = async (): Promise<void> => {
   try {
