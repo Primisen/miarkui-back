@@ -16,6 +16,9 @@ export class Review extends Model {
   id!: number;
 
   @Column(DataType.STRING)
+  name!: string;
+
+  @Column(DataType.STRING)
   text!: string;
 
   @ForeignKey(() => Subject)
