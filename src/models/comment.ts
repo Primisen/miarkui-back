@@ -1,5 +1,5 @@
 import { DataType, Model, Column, Table, BelongsTo, ForeignKey } from 'sequelize-typescript'
-import { User } from './User.js'
+import { User } from './user.js'
 import { Review } from './review.js'
 
 @Table({

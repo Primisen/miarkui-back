@@ -1,13 +1,21 @@
 import { Request } from 'express';
-import { User } from '../models/User.js';
+import { User } from '../models/user.js';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
-import { UserRole } from '../models/UserRole.js';
+import { UserRole } from '../models/userRole.js';
 
 dotenv.config();
 
 class UserService {
-    async create(request: Request) {
+    async create(request: Request) {//horrible method
+        if ((await User.findOne({ where: { username: request.body.username } })) != null) {
+            return ('User with ' +  request.body.username + ' username already exists.')
+        }
+
+        if ((await User.findOne({ where: { email: request.body.email } })) != null) {
+            return ('User with ' +  request.body.email + ' email already exists.')
+        }
+
         const user = new User({
             username: request.body.username,
             email: request.body.email,

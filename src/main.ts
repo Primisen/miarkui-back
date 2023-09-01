@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express, Request, Response } from 'express'
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import sequelize from './configs/sequelize.js';
@@ -36,6 +36,7 @@ app.use('/', subjectRouter);
 app.use('/', ratingRouter);
 app.use('/', reviewRouter);
 app.use('/', commentRouter);
+
 
 const start = async (): Promise<void> => {
   try {

@@ -1,6 +1,6 @@
 import { DataType, Model, Column, Table, BelongsTo, ForeignKey } from 'sequelize-typescript'
 import { Subject } from './subject.js'
-import { User } from './User.js'
+import { User } from './user.js'
 
 @Table({
   tableName: 'review',

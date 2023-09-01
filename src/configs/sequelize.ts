@@ -1,8 +1,8 @@
 import { Sequelize } from 'sequelize-typescript';
 import dotenv from 'dotenv';
-import { Role } from '../models/Role.js';
-import { User } from '../models/User.js';
-import { UserRole } from '../models/UserRole.js'
+import { Role } from '../models/role.js';
+import { User } from '../models/user.js';
+import { UserRole } from '../models/userRole.js'
 import { Category } from '../models/category.js'
 import { Rating } from '../models/rating.js'
 import { Subject } from '../models/subject.js'

@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import dotenv from 'dotenv';
-import { User } from '../models/User.js';
+import { User } from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
@@ -10,9 +10,10 @@ class SignInService {
     private user!: User;
     private token!: string;
 
-    async signIn(request: Request) {
+    async signIn(request: Request) {// request change to  user
         if (await this.credentialsIsCorrect(request.body.email, request.body.password))
             return this.createToken(this.user);
+        return 'Email or password is incorrect.';
     }
 
     private async credentialsIsCorrect(email: string, password: string) {

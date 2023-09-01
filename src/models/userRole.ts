@@ -1,6 +1,6 @@
 import { DataType, Model, Column, Table, ForeignKey } from 'sequelize-typescript'
-import { User } from './User.js'
-import { Role } from './Role.js'
+import { User } from './user.js'
+import { Role } from './role.js'
 
 @Table({
   tableName: 'user_role',
@@ -22,5 +22,4 @@ export class UserRole extends Model {
   @ForeignKey(() => Role)
   @Column
   roleId!: number;
-
 }

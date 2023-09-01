@@ -8,7 +8,7 @@ class UserController {
                 response.status(200).send(user);
             })
             .catch((error) => {
-                response.status(400).send(error);
+                response.status(500).send(error);
             });
     }
 }
