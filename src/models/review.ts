@@ -1,42 +1,45 @@
-import { DataType, Model, Column, Table, BelongsTo, ForeignKey } from 'sequelize-typescript'
-import { Subject } from './subject.js'
-import { User } from './user.js'
+import { DataType, Model, Column, Table, BelongsTo, ForeignKey, BelongsToMany } from 'sequelize-typescript';
+import { Subject } from './subject.js';
+import { User } from './user.js';
+import { Tag } from './tag.js';
+import { TagReview } from './tagReview.js';
 
 @Table({
-  tableName: 'review',
-  underscored: true,
-  timestamps: false,
+    tableName: 'review',
+    underscored: true,
+    timestamps: false,
 })
 export class Review extends Model {
-  @Column({
-    type: DataType.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  })
-  id!: number;
+    @Column({
+        type: DataType.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    })
+    id!: number;
 
-  @Column(DataType.STRING)
-  title!: string;
+    @Column(DataType.STRING)
+    title!: string;
 
-  @Column(DataType.STRING)
-  text!: string;
+    @Column(DataType.STRING)
+    text!: string;
 
-  @ForeignKey(() => Subject)
-  @Column
-  subjectId!: number;
+    @ForeignKey(() => Subject)
+    @Column
+    subjectId!: number;
 
-  @BelongsTo(() => Subject)
-  subject!: Subject;
+    @BelongsTo(() => Subject)
+    subject!: Subject;
 
-  @ForeignKey(() => User)
-  @Column
-  userId!: number;
+    @ForeignKey(() => User)
+    @Column
+    userId!: number;
 
-  @BelongsTo(() => User)
-  user!: User;
+    @BelongsTo(() => User)
+    user!: User;
 
-  @Column(DataType.STRING)
-  coverImageUrl!: string;
+    @Column(DataType.STRING)
+    coverImageUrl!: string;
 
-  //tags
+    @BelongsToMany(() => Tag, () => TagReview)
+    tags!: Tag[];
 }
