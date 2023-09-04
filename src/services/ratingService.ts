@@ -6,7 +6,7 @@ class RatingService {
     const rating = new Rating({
       userId: request.body.userId,
       subjectId: request.body.subjectId,
-      rating: request.body.rating
+      score: request.body.score
     });
     await rating.save();
     return rating;

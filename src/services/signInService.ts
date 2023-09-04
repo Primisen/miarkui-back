@@ -10,9 +10,15 @@ class SignInService {
     private user!: User;
     private token!: string;
 
-    async signIn(request: Request) {// request change to  user
-        if (await this.credentialsIsCorrect(request.body.email, request.body.password))
-            return this.createToken(this.user);
+    async signIn(request: Request) {
+        // request change to  user
+        if (await this.credentialsIsCorrect(request.body.email, request.body.password)) {
+            return {
+                token: this.createToken(this.user),
+                userId: this.user.id
+            };
+        }
+        // return this.createToken(this.user);
         return 'Email or password is incorrect.';
     }
 

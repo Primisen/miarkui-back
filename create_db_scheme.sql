@@ -34,7 +34,9 @@ CREATE TABLE user_role (
 
 CREATE TABLE category (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(20) NOT NULL
+    name VARCHAR(20) NOT NULL,
+
+    UNIQUE(name)
 );
 
 INSERT INTO category (name) VALUE ("MOVIE");
@@ -52,7 +54,7 @@ CREATE TABLE subject (
 
 CREATE TABLE rating (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    rating SMALLINT NOT NULL,
+    score SMALLINT NOT NULL,
     subject_id INT NOT NULL,
     user_id INT NOT NULL,
 
@@ -65,7 +67,7 @@ CREATE TABLE rating (
 
 CREATE TABLE review (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(25) NOT NULL,
+    title VARCHAR(25) NOT NULL,
     subject_id INT NOT NULL,
     user_id INT NOT NULL,
     cover_image_url VARCHAR(1000),

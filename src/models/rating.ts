@@ -16,7 +16,7 @@ export class Rating extends Model {
   id!: number;
 
   @Column(DataType.SMALLINT)
-  rating!: number;
+  score!: number;
 
   @ForeignKey(() => User)
   @Column

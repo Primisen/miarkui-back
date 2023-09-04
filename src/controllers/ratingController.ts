@@ -12,7 +12,7 @@ class RatingController {
       });
   }
 
-  async get(request: Request, response: Response) {
+  async get(request: Request, response: Response) {//by id?
     RatingService.get(request)
       .then((rating) => {
         response.status(200).send(rating);

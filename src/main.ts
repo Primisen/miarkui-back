@@ -7,6 +7,7 @@ import {subjectRouter} from './routes/subjectRouter.js'
 import { ratingRouter } from './routes/ratingRouter.js'
 import { reviewRouter } from './routes/reviewRouter.js'
 import { commentRouter } from './routes/commentRouter.js'
+import { categoryRouter } from './routes/categoryRouter.js'
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use('/', subjectRouter);
 app.use('/', ratingRouter);
 app.use('/', reviewRouter);
 app.use('/', commentRouter);
+app.use('/', categoryRouter);
 
 
 const start = async (): Promise<void> => {

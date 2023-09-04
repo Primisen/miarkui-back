@@ -16,7 +16,7 @@ export class Review extends Model {
   id!: number;
 
   @Column(DataType.STRING)
-  name!: string;
+  title!: string;
 
   @Column(DataType.STRING)
   text!: string;
@@ -34,4 +34,9 @@ export class Review extends Model {
 
   @BelongsTo(() => User)
   user!: User;
+
+  @Column(DataType.STRING)
+  coverImageUrl!: string;
+
+  //tags
 }

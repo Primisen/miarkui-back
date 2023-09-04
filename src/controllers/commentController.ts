@@ -12,7 +12,7 @@ class CommentController {
       });
   }
 
-  async get(request: Request, response: Response) {
+  async get(request: Request, response: Response) {//by id?
     CommentService.get(request)
       .then((comment) => {
         response.status(200).send(comment);
