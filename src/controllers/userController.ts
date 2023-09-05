@@ -11,6 +11,16 @@ class UserController {
                 response.status(500).send(error);
             });
     }
+
+    async getAllReviews(request: Request, response: Response) {
+        UserService.getAllReviews(Number(request.params.id))
+            .then((reviews) => {
+                response.status(200).send(reviews);
+            })
+            .catch((error) => {
+                response.status(500).send(error);
+            });
+    }
 }
 
 export default new UserController();

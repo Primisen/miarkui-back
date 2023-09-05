@@ -6,4 +6,4 @@ export const userRouter = Router();
 
 userRouter.post('/registration', UserController.create);
 userRouter.post('/login', SignInController.signIn);
-
+userRouter.get('/users/:id/reviews', UserController.getAllReviews)

@@ -7,7 +7,6 @@ import { Tag } from '../models/tag.js';
 
 class ReviewService {
     async create(request: Request) {
-
         const review = new Review(
             {
                 title: request.body.title,
@@ -24,31 +23,53 @@ class ReviewService {
                 include: [
                     {
                         model: Subject,
-                    }
+                    },
                 ],
             },
         );
         await review.save();
 
         for (let i = 0; i < request.body.tags.length; i++) {
-            console.log(request.body.tags[i])
+            console.log(request.body.tags[i]);
             const [tag, created] = await Tag.findOrCreate({
                 where: {
-                    name: request.body.tags[i]
-                }
-            })
+                    name: request.body.tags[i],
+                },
+            });
 
-            const tagReview  = new TagReview({
+            const tagReview = new TagReview({
                 tagId: tag.id,
-                reviewId: review.id
-            })
+                reviewId: review.id,
+            });
 
-            await tagReview.save()
+            await tagReview.save();
         }
     }
 
     async getAll() {
         return Review.findAll();
+    }
+
+    getById(id: number) {
+        return Review.findOne({
+            where: {
+                id,
+            },
+        });
+    }
+
+    async deleteById(reviewId: number) {
+        await TagReview.destroy({
+            where: {
+                reviewId
+            }
+        })
+
+        return Review.destroy({
+            where: {
+                id: reviewId
+            }
+        })
     }
 
     private async findOrCreateCategory(categoryName: string) {
