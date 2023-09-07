@@ -4,6 +4,7 @@ import { Subject } from '../models/subject.js';
 import { Category } from '../models/category.js';
 import { TagReview } from '../models/tagReview.js';
 import { Tag } from '../models/tag.js';
+import { Comment } from '../models/comment.js';
 
 class ReviewService {
     async create(request: Request) {
@@ -50,26 +51,48 @@ class ReviewService {
         return Review.findAll();
     }
 
-    getById(id: number) {
-        return Review.findOne({
-            where: {
-                id,
-            },
+    // getById(id: number) {
+    //     return Review.findOne({
+    //         where: {
+    //             id,
+    //         }
+    //     });
+    // }
+
+    async getById(id: number) {
+        const review = await Review.findOne({
+            include: [
+                {
+                    model: Comment,
+                    required: false,
+                    where: { reviewId: id },
+                },
+            ],
         });
+
+        return review;
     }
 
     async deleteById(reviewId: number) {
         await TagReview.destroy({
             where: {
-                reviewId
-            }
-        })
+                reviewId,
+            },
+        });
 
         return Review.destroy({
             where: {
-                id: reviewId
-            }
-        })
+                id: reviewId,
+            },
+        });
+    }
+
+    getComments(id: number) {
+        return Comment.findAll({
+            where: {
+                reviewId: id,
+            },
+        });
     }
 
     private async findOrCreateCategory(categoryName: string) {

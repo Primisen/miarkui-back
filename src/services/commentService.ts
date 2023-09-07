@@ -8,16 +8,9 @@ class CommentService {
       reviewId: request.body.reviewId,
       text: request.body.text
     });
-    await comment.save();
-    return comment;
-  }
 
-  async get(request: Request) {
-    return Comment.findAll({
-      where: {
-        reviewId: request.body.reviewId
-      }
-    })
+    console.log("comment: " + comment)
+    return comment.save();
   }
 }
 

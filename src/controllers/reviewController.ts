@@ -41,6 +41,17 @@ class ReviewController {
                 response.status(400).send(error);
             });
     }
+
+    getComments(request: Request, response: Response) {
+        ReviewService.getComments(Number(request.params.id))
+          .then((comments) => {
+              response.status(200).send(comments);
+          })
+          .catch((error) => {
+              response.status(400).send(error);
+          });
+    }
+
 }
 
 export default new ReviewController();

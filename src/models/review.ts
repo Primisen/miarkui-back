@@ -1,8 +1,9 @@
-import { DataType, Model, Column, Table, BelongsTo, ForeignKey, BelongsToMany } from 'sequelize-typescript';
+import { DataType, Model, Column, Table, BelongsTo, ForeignKey, BelongsToMany, HasMany } from 'sequelize-typescript'
 import { Subject } from './subject.js';
 import { User } from './user.js';
 import { Tag } from './tag.js';
 import { TagReview } from './tagReview.js';
+import { Comment } from './comment.js'
 
 @Table({
     tableName: 'review',
@@ -42,4 +43,7 @@ export class Review extends Model {
 
     @BelongsToMany(() => Tag, () => TagReview)
     tags!: Tag[];
+
+    @HasMany(() => Comment)
+    comments?: Comment[]
 }

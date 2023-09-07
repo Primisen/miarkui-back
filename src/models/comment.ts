@@ -23,7 +23,7 @@ export class Comment extends Model {
   reviewId!: number;
 
   @BelongsTo(() => Review)
-  review!: Review;
+  review!: Review[];
 
   @ForeignKey(() => User)
   @Column

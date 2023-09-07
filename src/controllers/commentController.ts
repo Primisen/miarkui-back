@@ -11,16 +11,6 @@ class CommentController {
         response.status(400).send(error);
       });
   }
-
-  async get(request: Request, response: Response) {//by id?
-    CommentService.get(request)
-      .then((comment) => {
-        response.status(200).send(comment);
-      })
-      .catch((error) => {
-        response.status(400).send(error);
-      });
-  }
 }
 
 export default new CommentController();
