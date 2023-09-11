@@ -24,8 +24,8 @@ class ReviewController {
 
     getById(request: Request, response: Response) {
         ReviewService.getById(Number(request.params.id))
-            .then((reviews) => {
-                response.status(200).send(reviews);
+            .then((review) => {
+                response.status(200).send(review);
             })
             .catch((error) => {
                 response.status(400).send(error);

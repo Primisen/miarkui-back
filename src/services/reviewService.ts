@@ -13,6 +13,7 @@ class ReviewService {
                 title: request.body.title,
                 subject: {
                     name: request.body.subject.name,
+                    rating: request.body.subject.rating,
                     categoryId: await this.findOrCreateCategory(request.body.subject.category.name),
                 },
                 userId: request.body.userId,
@@ -51,26 +52,13 @@ class ReviewService {
         return Review.findAll();
     }
 
-    // getById(id: number) {
-    //     return Review.findOne({
-    //         where: {
-    //             id,
-    //         }
-    //     });
-    // }
-
     async getById(id: number) {
-        const review = await Review.findOne({
-            include: [
-                {
-                    model: Comment,
-                    required: false,
-                    where: { reviewId: id },
-                },
-            ],
+        return await Review.findOne({
+            include: [{
+                model: Comment
+            }],
+            where: { id },
         });
-
-        return review;
     }
 
     async deleteById(reviewId: number) {
