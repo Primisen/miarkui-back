@@ -54,23 +54,37 @@ class ReviewService {
 
     async getById(id: number) {
         return await Review.findOne({
-            include: [{
-                model: Comment
-            }],
+            include: [
+                {
+                    model: Comment,
+                },
+                {
+                    model: Subject,
+                    include: [
+                        {
+                            model: Category,
+                        },
+                    ],
+                },
+                {
+                    model: Tag,
+                    
+                }
+            ],
             where: { id },
         });
     }
 
-    async deleteById(reviewId: number) {
+    async deleteById(id: number) {
         await TagReview.destroy({
             where: {
-                reviewId,
+                reviewId: id,
             },
         });
 
         return Review.destroy({
             where: {
-                id: reviewId,
+                id: id,
             },
         });
     }

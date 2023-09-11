@@ -29,7 +29,7 @@ export class Review extends Model {
     subjectId!: number;
 
     @BelongsTo(() => Subject)
-    subject!: Subject;
+    subject!: Subject;//[]
 
     @ForeignKey(() => User)
     @Column
