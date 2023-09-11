@@ -5,6 +5,7 @@ import { Tag } from './tag.js';
 import { TagReview } from './tagReview.js';
 import { Comment } from './comment.js'
 
+@BelongsToMany(() => Tag, () => TagReview)
 @Table({
     tableName: 'review',
     underscored: true,

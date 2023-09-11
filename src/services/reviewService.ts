@@ -19,7 +19,6 @@ class ReviewService {
                 userId: request.body.userId,
                 text: request.body.text,
                 coverImageUrl: request.body.coverImageUrl,
-                // tags: request.body.tags,
             },
             {
                 include: [
@@ -35,7 +34,7 @@ class ReviewService {
             console.log(request.body.tags[i]);
             const [tag, created] = await Tag.findOrCreate({
                 where: {
-                    name: request.body.tags[i],
+                    name: request.body.tags[i].name,
                 },
             });
 
@@ -68,7 +67,7 @@ class ReviewService {
                 },
                 {
                     model: Tag,
-                    
+                    attributes: ["name"],
                 }
             ],
             where: { id },
