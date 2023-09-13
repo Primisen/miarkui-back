@@ -36,9 +36,13 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^8.9.0",
+    "@opensearch-project/opensearch": "^2.3.1",
     "@types/body-parser": "^1.19.2",
     "@types/jsonwebtoken": "^9.0.2",
     "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express-openid-connect": "^2.16.0",
     "jsonwebtoken": "^9.0.1",
