@@ -10,6 +10,7 @@ import { commentRouter } from './routes/commentRouter.js';
 import { categoryRouter } from './routes/categoryRouter.js';
 import OpenSearch from './opensearch/openSearch.js';
 import { searchRouter } from './routes/serachRouter.js';
+import { openSearchIndexName } from './constants/openSearchIndexName.js'
 
 dotenv.config();
 const app: Express = express();
@@ -28,7 +29,7 @@ async function createConnectionToDB() {
 }
 
 async function createOpenSearchIndex() {
-    const name = 'miarkui';
+    const name = openSearchIndexName;
     const settings = {
         settings: {
             index: {

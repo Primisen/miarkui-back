@@ -1,15 +1,16 @@
 import OpenSearch from '../opensearch/openSearch.js';
 import { ApiResponse } from '@opensearch-project/opensearch';
+import { openSearchIndexName } from '../constants/openSearchIndexName.js'
 
 class SearchService {
     async search(searchExpression: string) {
         const openSearchResponse = await OpenSearch.getClient().search({
-            index: 'miarkui',
+            index: openSearchIndexName,
             body: {
                 query: {
                     multi_match: {
                         query: searchExpression,
-                        fields: ['title', 'text'],
+                        fields: ['title', 'text', 'subject.name'],
                     },
                 },
             },

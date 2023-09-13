@@ -5,6 +5,9 @@ import { Category } from '../models/category.js';
 import { TagReview } from '../models/tagReview.js';
 import { Tag } from '../models/tag.js';
 import { Comment } from '../models/comment.js';
+import { User } from '../models/user.js'
+import OpenSearch from '../opensearch/openSearch.js'
+import { openSearchIndexName } from '../constants/openSearchIndexName.js'
 
 class ReviewService {
     async create(request: Request) {
@@ -28,7 +31,7 @@ class ReviewService {
                 ],
             },
         );
-        await review.save();
+        const savedReview =await review.save();
 
         for (let i = 0; i < request.body.tags.length; i++) {
             console.log(request.body.tags[i]);
@@ -45,6 +48,11 @@ class ReviewService {
 
             await tagReview.save();
         }
+
+        await OpenSearch.getClient().index({
+            index: openSearchIndexName,
+            body: savedReview,
+        });
     }
 
     async getAll() {
@@ -52,10 +60,16 @@ class ReviewService {
     }
 
     async getById(id: number) {
-        return await Review.findOne({
+        const review =  await Review.findOne({
             include: [
                 {
                     model: Comment,
+                    include: [
+                        {
+                            model: User,
+                            attributes: ['username']
+                        }
+                    ]
                 },
                 {
                     model: Subject,
@@ -67,11 +81,13 @@ class ReviewService {
                 },
                 {
                     model: Tag,
-                    attributes: ["name"],
+                    attributes: ['name'],
                 }
             ],
             where: { id },
         });
+        console.log(review)
+        return review
     }
 
     async deleteById(id: number) {
