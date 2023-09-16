@@ -10,6 +10,7 @@ import { Review } from '../models/review.js'
 import { Comment } from '../models/comment.js'
 import { Tag } from '../models/tag.js'
 import { TagReview } from '../models/tagReview.js'
+import { Likes } from '../models/likes.js'
 
 dotenv.config();
 
@@ -18,7 +19,7 @@ const sequelize = new Sequelize({
     dialect: 'mysql',
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
-    models: [Role, User, UserRole, Category, Rating, Subject, Review, Comment, Tag, TagReview],
+    models: [Role, User, UserRole, Category, Rating, Subject, Review, Comment, Tag, TagReview, Likes],
 });
 
 export default sequelize;

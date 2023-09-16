@@ -5,9 +5,10 @@ import { Category } from '../models/category.js';
 import { TagReview } from '../models/tagReview.js';
 import { Tag } from '../models/tag.js';
 import { Comment } from '../models/comment.js';
-import { User } from '../models/user.js'
-import OpenSearch from '../opensearch/openSearch.js'
-import { openSearchIndexName } from '../constants/openSearchIndexName.js'
+import { User } from '../models/user.js';
+import OpenSearch from '../opensearch/openSearch.js';
+import { openSearchIndexName } from '../constants/openSearchIndexName.js';
+import { Likes } from '../models/likes.js';
 
 class ReviewService {
     async create(request: Request) {
@@ -31,7 +32,7 @@ class ReviewService {
                 ],
             },
         );
-        const savedReview =await review.save();
+        const savedReview = await review.save();
 
         for (let i = 0; i < request.body.tags.length; i++) {
             console.log(request.body.tags[i]);
@@ -56,20 +57,38 @@ class ReviewService {
     }
 
     async getAll() {
-        return Review.findAll();
+        const reviews = await Review.findAll({
+            include: [
+                {
+                    model: Subject,
+                    include: [
+                        {
+                            model: Category,
+                        },
+                    ],
+                },
+                {
+                    model: Tag,
+                },
+                {
+                    model: Likes,
+                },
+            ],
+        });
+        return reviews;
     }
 
     async getById(id: number) {
-        const review =  await Review.findOne({
+        const review = await Review.findOne({
             include: [
                 {
                     model: Comment,
                     include: [
                         {
                             model: User,
-                            attributes: ['username']
-                        }
-                    ]
+                            attributes: ['username'],
+                        },
+                    ],
                 },
                 {
                     model: Subject,
@@ -82,12 +101,14 @@ class ReviewService {
                 {
                     model: Tag,
                     attributes: ['name'],
-                }
+                },
+                {
+                    model: Likes,
+                },
             ],
             where: { id },
         });
-        console.log(review)
-        return review
+        return review;
     }
 
     async deleteById(id: number) {

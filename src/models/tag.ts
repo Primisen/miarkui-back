@@ -2,7 +2,6 @@ import { DataType, Model, Column, Table, BelongsToMany } from 'sequelize-typescr
 import { Review } from './review.js';
 import { TagReview } from './tagReview.js';
 
-@BelongsToMany(() => Review, () => TagReview)
 @Table({
     tableName: 'tag',
     underscored: true,
@@ -14,9 +13,12 @@ export class Tag extends Model {
         autoIncrement: true,
         primaryKey: true,
     })
-    id!: number;
+    id: number;
 
     @Column(DataType.STRING)
-    name!: string;
+    name: string;
+
+    @BelongsToMany(() => Review, () => TagReview, 'tag_id')
+    reviews: Review[]
 
 }

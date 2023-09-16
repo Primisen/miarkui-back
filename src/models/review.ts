@@ -4,8 +4,8 @@ import { User } from './user.js';
 import { Tag } from './tag.js';
 import { TagReview } from './tagReview.js';
 import { Comment } from './comment.js'
+import { Likes } from './likes.js'
 
-@BelongsToMany(() => Tag, () => TagReview)
 @Table({
     tableName: 'review',
     underscored: true,
@@ -17,34 +17,37 @@ export class Review extends Model {
         autoIncrement: true,
         primaryKey: true,
     })
-    id!: number;
+    id: number;
 
     @Column(DataType.STRING)
-    title!: string;
+    title: string;
 
     @Column(DataType.STRING)
-    text!: string;
+    text: string;
 
     @ForeignKey(() => Subject)
     @Column
-    subjectId!: number;
+    subjectId: number;
 
     @BelongsTo(() => Subject)
-    subject!: Subject;//[]
+    subject: Subject;
 
     @ForeignKey(() => User)
     @Column
-    userId!: number;
+    userId: number;
 
     @BelongsTo(() => User)
-    user!: User;
+    user: User;
 
     @Column(DataType.STRING)
-    coverImageUrl!: string;
+    coverImageUrl: string;
 
-    @BelongsToMany(() => Tag, () => TagReview)
-    tags!: Tag[];
+    @BelongsToMany(() => Tag, () => TagReview, 'review_id')
+    tags: Tag[];
 
     @HasMany(() => Comment)
     comments?: Comment[]
+
+    @HasMany(() => Likes)
+    likes: Likes[]
 }

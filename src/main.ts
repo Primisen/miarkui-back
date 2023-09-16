@@ -11,6 +11,7 @@ import { categoryRouter } from './routes/categoryRouter.js';
 import OpenSearch from './opensearch/openSearch.js';
 import { searchRouter } from './routes/serachRouter.js';
 import { openSearchIndexName } from './constants/openSearchIndexName.js'
+import { likesRouter } from './routes/likesRouter.js'
 
 dotenv.config();
 const app: Express = express();
@@ -66,4 +67,5 @@ function configureRoutes() {
     app.use('/', commentRouter);
     app.use('/', categoryRouter);
     app.use('/', searchRouter);
+    app.use('/', likesRouter);
 }
