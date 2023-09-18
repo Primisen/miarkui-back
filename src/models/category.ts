@@ -11,8 +11,8 @@ export class Category extends Model {
         autoIncrement: true,
         primaryKey: true,
     })
-    id!: number;
+    id: number;
 
     @Column(DataType.STRING)
-    name!: string;
+    name: string;
 }
