@@ -13,17 +13,17 @@ export class User extends Model {
         autoIncrement: true,
         primaryKey: true,
     })
-    id!: number;
+    id: number;
 
     @Column(DataType.STRING)
-    username!: string;
+    username: string;
 
     @Column(DataType.STRING)
-    email!: string;
+    email: string;
 
     @Column(DataType.STRING)
-    password!: string;
+    password: string;
 
     @BelongsToMany(() => Role, () => UserRole)
-    roles!: Role[];
+    roles: Role[];
 }
