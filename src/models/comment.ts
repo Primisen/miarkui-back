@@ -13,22 +13,22 @@ export class Comment extends Model {
     autoIncrement: true,
     primaryKey: true,
   })
-  id!: number;
+  id: number;
 
   @Column(DataType.STRING)
-  text!: string;
+  text: string;
 
   @ForeignKey(() => Review)
   @Column
-  reviewId!: number;
+  reviewId: number;
 
   @BelongsTo(() => Review)
-  review!: Review[];
+  review: Review[];
 
   @ForeignKey(() => User)
   @Column
-  userId!: number;
+  userId: number;
 
   @BelongsTo(() => User)
-  user!: User;
+  user: User;
 }
