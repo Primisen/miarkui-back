@@ -13,22 +13,22 @@ export class Rating extends Model {
     autoIncrement: true,
     primaryKey: true,
   })
-  id!: number;
+  id: number;
 
   @Column(DataType.SMALLINT)
-  score!: number;
+  score: number;
 
   @ForeignKey(() => User)
   @Column
-  userId!: number;
+  userId: number;
 
   @BelongsTo(() => User)
-  user!: User;
+  user: User;
 
   @ForeignKey(() => Subject)
   @Column
-  subjectId!: number;
+  subjectId: number;
 
   @BelongsTo(() => Subject)
-  subject!: Subject;
+  subject: Subject;
 }
