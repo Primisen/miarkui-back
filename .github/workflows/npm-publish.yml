@@ -28,5 +28,6 @@ jobs:
         echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env 
         echo JWT_EXPIRES_IN=${{ secrets.JWT_EXPIRES_IN }} >> .env 
         echo SALT_ROUNDS=${{ secrets.SALT_ROUNDS }} >> .env
+        OPENSEARCH_URL=${{ secrets.OPENSEARCH_URL }} >> .env
     - run: npm ci
     - run: pm2 restart back
