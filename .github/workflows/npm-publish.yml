@@ -30,4 +30,4 @@ jobs:
         echo SALT_ROUNDS=${{ secrets.SALT_ROUNDS }} >> .env
         echo OPENSEARCH_URL=${{ secrets.OPENSEARCH_URL }} >> .env
     - run: npm ci
-    - run: pm2 restart back
+    - run: /home/ubuntu/.nvm/versions/node/v16.16.0/bin/pm2 restart back
