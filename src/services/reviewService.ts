@@ -105,6 +105,9 @@ class ReviewService {
                 {
                     model: Likes,
                 },
+                {
+                    model: User
+                }
             ],
             where: { id },
         });
