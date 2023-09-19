@@ -28,6 +28,9 @@ class ReviewService {
                 include: [
                     {
                         model: Subject,
+                        include: [{
+                            model:  Category
+                        }]
                     },
                 ],
             },
