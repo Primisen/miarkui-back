@@ -4,6 +4,10 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { UserRole } from '../models/userRole.js';
 import { Review } from '../models/review.js';
+import { Subject } from '../models/subject.js';
+import { Category } from '../models/category.js';
+import { Tag } from '../models/tag.js';
+import { Likes } from '../models/likes.js';
 
 dotenv.config();
 
@@ -35,9 +39,23 @@ class UserService {
     }
 
     getAllReviews(id: number) {
-        //it is a little strange method
-
         return Review.findAll({
+            include: [
+                {
+                    model: Subject,
+                    include: [
+                        {
+                            model: Category,
+                        },
+                    ],
+                },
+                {
+                    model: Tag,
+                },
+                {
+                    model: Likes,
+                },
+            ],
             where: {
                 userId: id,
             },
